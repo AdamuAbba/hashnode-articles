@@ -1,0 +1,12 @@
+{
+  "cSpell.words": [
+    "getblockchaininfo",
+    "getinfo",
+    "listpeers",
+    "lncli",
+    "loadwallet",
+    "newaddress",
+    "pubkey",
+    "walletbalance"
+  ]
+}
