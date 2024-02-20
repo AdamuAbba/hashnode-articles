@@ -2,44 +2,32 @@
 
 The goal of this article is to help you
 
-- confirm that we have the correct bitcoin.conf settings ✅
-- spin up a Bitcoin network ✅
-- Ensure we are on the regtest network ✅
+- confirm that we have the correct bitcoin.conf settings
+- spin up a Bitcoin network
+- Ensure we are on the regtest network
 - Prepare the first lightning node aka `lnd1` for some action ✅
   - Spin up node ✅
   - Create wallet ✅
   - Get some information about the node ✅
   - Generate an Address ✅
   - Fund the `lnd1` wallet with some bitcoin ✅
-    - load up our existing local Bitcoin wallet ✅
-    - send some bitcoin to generated `lnd1` wallet address (to be sent to `lnd2` later on) ✅
-  - Check wallet balance ✅
-- Prepare the second lightning node aka `lnd2` for some action ✅
-- connect the lightning nodes to form a peer ✅
-- open a payment channel between two lightning nodes 🛠
-- create an invoice from one node 🛠
-- initiate fulfillment of invoice (transaction) from the second node 🛠
-- kill both lightning and the Bitcoin network after the transaction 🛠
+    - load up our existing local Bitcoin wallet
+    - send some bitcoin to generated `lnd1` wallet address (to be sent to `lnd2` later on)
+  - Check wallet balance
+- Prepare the second lightning node aka `lnd2` for some action
+- connect the lightning nodes to form a peer
+- open a payment channel between two lightning nodes
+- create an invoice from one node
+- initiate fulfillment of invoice (transaction) from the second node
+- kill both lightning and the Bitcoin network after the transaction
 
 ### 📜 Introduction
 
-Welcome back fellow Bitcoin/lightning developer I know you're itching for some action...
+Welcome to part 2 of the series my fellow Bitcoin/lightning developer. I know you're itching for some action...
 
 ![morty cop](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGs0czQycTVkamp0ZmlxbTF0eDYxa21rcHM0dTRnemh4NWZwenVxMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YRiRZGlioGVLAwo86B/giphy.gif)
 
 This is the second part of a two-part series and in case you haven't already read the first part go over here [Part 1](https://hashnode.com/post/clsctrvcp00000ale7n0pfur8) so you can fully maximize this second part.
-
-### 📜 Requirements
-
-My system specs
-
-- Machine: MacBook Pro
-- Operating System: macOS Monterey
-- terminal: kitty
-- shell: ZSH
-- Editor: Neovim
-- Terminal Multiplexer: [tmux](https://github.com/tmux/tmux/wiki)
-- Package Manager: [Homebrew](https://brew.sh/)
 
 ### 📜 Some boring but very important stuff to get us started
 
@@ -47,11 +35,9 @@ My system specs
 
 There are two nuggets I would like you to keep in mind.
 
-- First nugget: keep in mind that the Lightning Network is a second-layer protocol built on top of the `Bitcoin blockchain` and it enables faster and cheaper transactions by creating off-chain payment `channels` between `users`. These `channels` allow multiple transactions to occur without needing to be recorded on the main `Bitcoin blockchain`. Instead, only the opening and closing `transactions` of the channel are settled on the `blockchain`.
+The Lightning Network is a second-layer protocol built on top of the `Bitcoin blockchain` and it enables faster and cheaper transactions by creating off-chain payment `channels` between `users`. These `channels` allow multiple transactions to occur without needing to be recorded on the main `Bitcoin blockchain`. Instead, only the opening and closing `transactions` of the channel are settled on the `blockchain`.
 
-- Second nugget: the Regtest (regression test) Bitcoin network mode creates a `local private blockchain` where you can adjust the parameters to what you want.
-
-According to our nuggets above, we understand that we need to run our lightning network on top of an active Bitcoin network running a local private blockchain (regtest)
+The Regtest (regression test) Bitcoin network mode creates a `local private blockchain` where you can adjust the parameters to what you want. For this demonstration, we would run our lightning network on top of an active Bitcoin network running a local private blockchain (regtest)
 
 > _Quick note: throughout this article, long `output` codeblock data are truncated_
 
