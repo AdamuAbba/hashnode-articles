@@ -5,25 +5,20 @@ The goal of this article is to help you
 - confirm that we have the correct bitcoin.conf settings
 - spin up a Bitcoin network
 - Ensure we are on the regtest network
-- Prepare the first lightning node aka `lnd1` for some action ✅
-  - Spin up node ✅
-  - Create wallet ✅
-  - Get some information about the node ✅
-  - Generate an Address ✅
-  - Fund the `lnd1` wallet with some bitcoin ✅
+- Prepare the first lightning node aka `lnd1` for some action
+  - Spin up node
+  - Create wallet
+  - Get some information about the node
+  - Generate an Address
+  - Fund the `lnd1` wallet with some bitcoin
     - load up our existing local Bitcoin wallet
     - send some bitcoin to generated `lnd1` wallet address (to be sent to `lnd2` later on)
   - Check wallet balance
 - Prepare the second lightning node aka `lnd2` for some action
-- connect the lightning nodes to form a peer
-- open a payment channel between two lightning nodes
-- create an invoice from one node
-- initiate fulfillment of invoice (transaction) from the second node
-- kill both lightning and the Bitcoin network after the transaction
 
 ### 📜 Introduction
 
-Welcome to part 2 of the series my fellow Bitcoin/lightning developer. I know you're itching for some action...
+Welcome to Part 2 of our series, fellow Bitcoin/Lightning developers. I'm sure you're itching for some action...
 
 ![morty cop](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGs0czQycTVkamp0ZmlxbTF0eDYxa21rcHM0dTRnemh4NWZwenVxMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YRiRZGlioGVLAwo86B/giphy.gif)
 
@@ -32,8 +27,6 @@ This is the second part of a two-part series and in case you haven't already rea
 ### 📜 Some boring but very important stuff to get us started
 
 ![rick thinking](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3I0OXlvMGVuaHRseGJmZ25xdjIzczRuazVteWZ3MGs4M3ZpNnFobiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6SPT4vjEWBPjECMXwr/giphy.gif)
-
-There are two nuggets I would like you to keep in mind.
 
 The Lightning Network is a second-layer protocol built on top of the `Bitcoin blockchain` and it enables faster and cheaper transactions by creating off-chain payment `channels` between `users`. These `channels` allow multiple transactions to occur without needing to be recorded on the main `Bitcoin blockchain`. Instead, only the opening and closing `transactions` of the channel are settled on the `blockchain`.
 
@@ -328,89 +321,10 @@ lncli1 walletbalance
 
 To get the second lnd node configured and running, repeat all the steps we followed above but this time around, funding the `lnd2` wallet with some bitcoin is optional as this node would be on the receiving end of our transaction.
 
-### 📜 Connect the lightning nodes to form a peer
-
-Now that both of our nodes are ready for some action, we need to connect them to form a `peer-to-peer` network this would enable our nodes to communicate with each other on the network by opening and closing channels.
-
-From `lnd1` run
-
-**command:**
-
-```zsh
-lncli1 listpeers
-```
-
-**output:**
-
-```json
-{
-  "peers": [] //👈🏿 no peers for now...let's fix that.
-}
-```
-
-From `lnd2` run the command below to get its `identity_pubkey` which we would use in connecting the node to `lnd1`
-
-**command:**
-
-```zsh
-lncli2 getinfo
-```
-
-**output:**
-
-```json
-{
-    "version":  "0.17.0-beta commit=fn/v1.0.1-85-ge31d15989",
-    "commit_hash":  "e31d1598932a814c2d44b774e5110746295df711",
-    "identity_pubkey":  "024baa5e16c118f42cddd95fd828b32fa8dfcfea55fa384e89e2da0f3b96fc4579",//👈🏿 copy this
-    "alias":  "024baa5e16c118f42cdd",
-...
-}
-```
-
-Now let's connect `lnd2` to `lnd1` by passing the `identity_pubkey`, `IP address` and `port`
-
-**command:**
-
-```zsh
- lncli1 connect 024baa5e16c118f42cddd95fd828b32fa8dfcfea55fa384e89e2da0f3b96fc4579@localhost:9734
-```
-
-**output:**
-
-```json
-{} //👈🏿 don't worry this is the correct output.
-```
-
-Let's check for the list of peers once again at `lnd1`
-
-**command:**
-
-```zsh
-  lncli1 listpeers
-```
-
-**output:**
-
-```json
-{
-    "peers":  [
-        {
-            "pub_key":  "024baa5e16c118f42cddd95fd828b32fa8dfcfea55fa384e89e2da0f3b96fc4579",
-            "address":  "127.0.0.1:9734",
-            "bytes_sent":  "394",
-            "bytes_recv":  "394",
-            "sat_sent":  "0",
-            "sat_recv":  "0",
-            "inbound":  false,
-            "ping_time":  "-1",
-            "sync_type":  "ACTIVE_SYNC",
-            .....
-}]}
-```
-
-🎉 Both Nodes are now successfully connected as a `peer` on our local lightning network.
-
-![connected](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXp2YjhrODg5d21hMGM2MDhiM25iajh1enJsZ3R2aHBmNzV6c3N1aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DoWqmz4TGL3Tk9jwTZ/giphy.gif)
-
 ### 📜 Conclusion
+
+We'll conclude here. Thank you for staying with us until the end of the second part. In the final part, we'll walk through connecting peers, opening payment channels, and other processes necessary for a valid lightning transaction.
+
+### 📜 Useful links
+
+- [part 1 of the series](https://hashnode.com/post/clsctrvcp00000ale7n0pfur8)
