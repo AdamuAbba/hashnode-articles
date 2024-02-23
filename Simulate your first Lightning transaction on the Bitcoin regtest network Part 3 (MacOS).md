@@ -1,3 +1,9 @@
+### 📜Objective
+
+The goal of this article is to help you
+
+### 📜 Introduction
+
 ### 📜 Connect the lightning nodes to form a peer
 
 Now that both of our nodes are ready for some action, we need to connect them to form a `peer-to-peer` network this would enable our nodes to communicate with each other on the network by opening and closing channels.
