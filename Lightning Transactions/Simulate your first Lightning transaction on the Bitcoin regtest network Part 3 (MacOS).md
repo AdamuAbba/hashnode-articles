@@ -4,7 +4,7 @@ The goal of this article is to help you
 
 - Connect the lightning nodes to form a peer
 - Open a payment channel between `lnd1` and `lnd2` nodes
-- Mine some blocks to add confirmations to Channel created above
+- Add some confirmations to the block that the channel opening transaction was mined on
 - Check the list of channels to ensure our channel is ready and funded
 - Create an invoice on `lnd2`
 - inspect the invoice created above from `lnd1`
@@ -27,7 +27,7 @@ To be successful in this tutorial in case if you haven't already gone through th
 - ✅ checkout [Part 1](https://shyxperience.hashnode.dev/simulate-your-first-lightning-transaction-on-the-bitcoin-regtest-network-part-1-macos)
 - ✅ checkout [Part 2](https://shyxperience.hashnode.dev/simulate-your-first-lightning-transaction-on-the-bitcoin-regtest-network-part-2-macos)
 - ✅ Have a running Bitcoin network daemon (on regtest)
-- ✅ Have both active and running instances of `lnd1` and `lnd2`
+- ✅ Have two active and running lightning node instances as lnd1 and lnd2
 
 If the above prerequisites list has been satisfied then you can proceed beyond this point.
 
@@ -120,7 +120,7 @@ Let's check for the list of peers once again at `lnd1`
 
 Now let's open up a `payment channel` between `lnd1` and `lnd2`
 
-> Quick note: A payment channel on the lightning network is a two-way connection between two parties (lightening nodes) that enables them to exchange bitcoin.
+> Quick note: A payment channel on the lightning network is a two-way connection between two parties (lightning nodes) that enables them to exchange bitcoin.
 
 To create a payment channel between `lnd1` and `lnd2`, we'll be making use of the `pub_key` of `lnd2` and we'll then be funding the channel with `100,000 SAT`. the `100,000 SAT` is `lnd1's` contribution to the channel
 
@@ -138,9 +138,9 @@ To create a payment channel between `lnd1` and `lnd2`, we'll be making use of th
 }
 ```
 
-### 📜 Mine some blocks to add confirmations to Channel created above
+### 📜 Mine some blocks to increase the confirmations for the Channel opening transaction
 
-Once the channel has been created and `lnd1's` BTC contribution has been added to the channel, we need to mine/generate some blocks to add confirmations to the transaction
+Once the channel has been created and `lnd1's` BTC contribution has been added to the channel, we need to mine/generate some blocks to increase confirmations for the Channel opening transaction.
 
 **command:**
 
@@ -381,4 +381,4 @@ Finally, an amazing end to a three part journey.
 
 ![happy](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2Rya2p1OGxoY2hkMTVuYXNkOWlzNG5sc2M2Mzg2eWk3NG1xMWE5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lI4bYmcsPJX9Go/giphy.gif)
 
-I hope this article helped help you gain some hands-on experience in working with the lightning network. see you in the next one 👋🏿
+I hope this article helped you gain some hands-on experience in working with the lightning network. Remember, Lightning payments are faster, cheaper and less complex than the conventional bitcoin transaction. see you in the next one 👋🏿
