@@ -5,8 +5,10 @@
     "listpeers",
     "lncli",
     "loadwallet",
+    "Nakomoto",
     "newaddress",
     "pubkey",
+    "Satoshi",
     "walletbalance"
   ]
 }
