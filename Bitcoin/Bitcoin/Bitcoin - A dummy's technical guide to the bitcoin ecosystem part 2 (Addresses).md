@@ -33,7 +33,7 @@ Let's look at the types of Bitcoin Addresses and why they are important.
 
 This is the oldest of all Bitcoin addresses. In fact, it is the original Bitcoin address and has a prefix of `1`.
 
-Quick Facts
+Quick Factsh
 
 - They are accountable, stable and universally supported.
 - Transactions via Legacy addresses have are large in size, meaning they take up more block space.
