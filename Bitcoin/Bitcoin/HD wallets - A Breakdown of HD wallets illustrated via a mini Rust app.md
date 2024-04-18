@@ -52,9 +52,19 @@ Let's open up and run the app
 cd shy-bit-rust && nvim . && cargo run
 ```
 
-## What are HD wallets
+## What are HD wallets (BIP32)
 
 Hierarchical Deterministic wallets as defined by the Bip32 standard are a kind of cryptocurrency wallet that allows for generation of keys from a single seed or mnemonic phrase
+
+## BIP39
+
+The BIP39 standard works by generating a group of 12,18 or 24 random easy-to-remember words called a mnemonic or seed phrase from a random number which is mostly around a length of 128 to 256-bit.
+
+> Quick Note: the more the bits, the stronger the mnemonic phrase and the more words you have in the phrase generated.
+
+![HD wallet](https://global.discourse-cdn.com/business4/uploads/cardano/original/2X/9/93677908b7eed008ae23acad32eb8908f22114df.png =450x300)
+
+_source [forum.cardano.org](https://forum.cardano.org/t/how-an-hd-wallet-works/28460)_
 
 ## Advantages of HD wallets
 
