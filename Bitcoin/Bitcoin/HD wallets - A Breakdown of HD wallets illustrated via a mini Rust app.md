@@ -66,6 +66,26 @@ The BIP39 standard works by generating a group of 12,18 or 24 random easy-to-rem
 
 _source [forum.cardano.org](https://forum.cardano.org/t/how-an-hd-wallet-works/28460)_
 
+## BIP44
+
+The BIP44 standard is an improvement on the BIP32 standard and it implements a structure for a "derivation path" which enables a wallet to derive or generate keys from a root seed.
+
+### Structure of the BIP44 derivation path
+
+Let's look at the structure of the BIP44 derivation path below:
+
+m / purpose' / coin_type' / account' / change / address_index
+
+Each element in the path has a specific meaning:
+
+m: This is the master node and represents the root of your HD wallet.
+
+purpose': Always set to 44' for BIP44 compliant wallets.
+
+coin_type': Specifies the type of cryptocurrency. Each cryptocurrency has a specific number assigned, such as 0' for Bitcoin and 60' for Ethereum.
+
+account': A BIP44 wallet can have multiple accounts, and this number represents each unique account.
+
 ## Advantages of HD wallets
 
 Now that we know what we have some idea of what HD wallets are, let's look at some advantages
