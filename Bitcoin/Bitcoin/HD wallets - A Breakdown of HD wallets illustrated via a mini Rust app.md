@@ -6,17 +6,17 @@ The goal of this article to help you
 - Learn how to build a very simple rust CLI app to help us understand Bitcoin HD wallet
 - Learn about HD wallets
 - Advantages and Disadvantages of HD wallets
-- Learn a bit about Bip32 and it's underlying standards
+- Learn a bit about Bip32 and a few it's underlying standards and improvements
   - Bip39
   - Bip44
-  - Bip49
-  - Bip84
+- Create a HD wallet using the rust CLI app
 
 ## Requirements & specs
 
-### Requirements and specs
+### Requirements
 
 - Some understanding of the Bitcoin ecosystem
+- A working installation of [Bitcoin core](https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md)
 - Some basic basic knowledge of the Rust Language
 - The rust installed and configured on your machine
 
@@ -30,7 +30,7 @@ The goal of this article to help you
 
 ## 📜 Introduction
 
-So you recently came across HD wallets and you're a bit curious as to why they are so awesome. furthermore, you're the kind of guy looking for a mini pet rust project to get your hands dirty with some bitcoin rust development. you've come to to the right place
+So you recently came across HD wallets and you're a bit curious as to why they are so awesome. furthermore, you're the kind of guy looking for a mini pet rust project to get your hands dirty with some bitcoin rust development. If that sounds like you then you've come to to the right place.
 
 ## Setting up your rust and bootstrapping your CLI app
 
@@ -68,23 +68,30 @@ _source [forum.cardano.org](https://forum.cardano.org/t/how-an-hd-wallet-works/2
 
 ## BIP44
 
-The BIP44 standard is an improvement on the BIP32 standard and it implements a structure for a "derivation path" which enables a wallet to derive or generate keys from a root seed.
+The BIP44 standard is an improvement on the BIP32 protocol by implementing a Multi-Account Hierarchy for Deterministic Wallets
 
 ### Structure of the BIP44 derivation path
 
 Let's look at the structure of the BIP44 derivation path below:
 
-m / purpose' / coin_type' / account' / change / address_index
+m / purpose’ / coin’ / account’ / change / address_index
 
-Each element in the path has a specific meaning:
+- m: This is the master private key and represents the root node of your HD wallet.
+- purpose': This is set to 44' for BIP44 enabled wallets.
+- coin': This value represents the type of cryptocurrency. e.g
+  - Bitcoin = 0'
+  - Ethereum = 60'
+- account': This number represents an account in a BIP44 wallet
+- change: This is either 0 for external/receiving addresses or 1 for internal/change addresses.
+- address_index: Represents the individual addresses generated under each account.
 
-m: This is the master node and represents the root of your HD wallet.
+![BIP44](https://miro.medium.com/v2/resize:fit:720/format:webp/1*eXE-y4lewW42K7XjPR4_Uw.png)
 
-purpose': Always set to 44' for BIP44 compliant wallets.
+_source: [FoxWallet](https://medium.com/@FoxWallet/bip32-bip39-and-bip44-explained-1e8a4a327a8b)_
 
-coin_type': Specifies the type of cryptocurrency. Each cryptocurrency has a specific number assigned, such as 0' for Bitcoin and 60' for Ethereum.
+## Creating a new wallet in the rust app
 
-account': A BIP44 wallet can have multiple accounts, and this number represents each unique account.
+Let's create a new HD wallet using the rust app
 
 ## Advantages of HD wallets
 
@@ -117,3 +124,9 @@ This is valid because all public keys and addresses can be generated from the pr
 On big and obvious concern of working with HD wallets is the fact that the security of your seed or mneomonic phrase getting compromised would naturally imply the lost of ownership to your wallet
 
 ### Conclusion
+
+In this aticle we have touched on just 3 out of 389 existing Bips to give you a general view of some of the improvements that have gone into HD wallets over the years to make them more efficient and secure
+
+### useful links
+
+- [Bitcoin/Bips](https://github.com/bitcoin/bips/tree/master)
